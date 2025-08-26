@@ -31,12 +31,44 @@ class Pet {
   }
 }
 
+let selectedPet = null;
+const pet1Element = document.getElementById('pet1');
+const pet2Element = document.getElementById('pet2');
+
+function selectPet(id) {
+  selectedPet = id;
+
+  pet1Element.classList.remove("selected");
+  pet2Element.classList.remove("selected");
+
+  if (id === 1) {
+    pet1Element.classList.add("selected");
+  } else if (id === 2) {
+    pet2Element.classList.add("selected");
+  }
+  
+}
+
 const pet1 = new Pet(1);
+const pet2 = new Pet(2);
 
 function feedPet(amount) {
-  pet1.feed(amount);
+  if (selectedPet === 1) {
+    pet1.feed(amount);
+  } else if (selectedPet === 2) {
+    pet2.feed(amount);
+  }
+  
 }
 
 setInterval(() => {
   pet1.decreaseFedLevel();
+  pet2.decreaseFedLevel();
 }, 5000);
+
+selectPet(1);
+
+//Play around with `setInterval` and set it to a higher amount to make the game easier
+//Keep stock of the treats
+//Disable a `treat` when the number is 0 and style it accordingly if it's unavailable
+//Add a timer to see how long the player could keep their pets
